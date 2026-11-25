@@ -36,9 +36,9 @@ jobs:
         run: |
           echo "Checking signing configuration..."
           test -f android/key.properties || exit 1
-          test -f android/app/gkrez.jks || exit 1
+          test -f android/app/modellive.jks || exit 1
           echo "[OK] android/key.properties found"
-          echo "[OK] android/app/gkrez.jks found"
+          echo "[OK] android/app/modellive.jks found"
 
       - name: Install dependencies
         run: flutter pub get
