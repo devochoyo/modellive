@@ -47,12 +47,12 @@ jobs:
         run: flutter analyze --no-fatal-infos --no-fatal-warnings
 
       - name: Build signed APK
-        run: flutter build apk --release
+        run: flutter build apk --release --no-shrink
         env:
           GRADLE_OPTS: "-Dorg.gradle.vfs.watch=false"
 
       - name: Build signed AAB
-        run: flutter build appbundle --release
+        run: flutter build appbundle --release --no-shrink
         env:
           GRADLE_OPTS: "-Dorg.gradle.vfs.watch=false"
 

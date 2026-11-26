@@ -79,7 +79,7 @@ class MainActivity : FlutterActivity() {
 
         // Pulls readable text out of a binary crash dump (like the unix
         // "strings" command): library names, abort messages, signal info.
-        private fun printableStrings(bytes: ByteArray, minLen: Int = 6, maxChars: Int = 4000): String {
+        private fun printableStrings(bytes: ByteArray, minLen: Int = 6, maxChars: Int = 60000): String {
             val out = StringBuilder()
             val cur = StringBuilder()
             for (b in bytes) {
