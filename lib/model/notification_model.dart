@@ -1,6 +1,6 @@
 // An app notification.
 // Types: new_follower, new_message, join_request, join_request_approved,
-// join_request_rejected, removed_from_stream.
+// join_request_rejected, removed_from_stream, post_like, post_comment.
 class NotificationModel {
   final int id;
   final String type;

@@ -9,12 +9,14 @@ import 'screens/auth/reset_password_screen.dart';
 import 'screens/user/balance_screen.dart';
 import 'screens/user/buy_coins_screen.dart';
 import 'screens/user/buy_flowers_screen.dart';
+import 'screens/user/create_post_screen.dart';
 import 'screens/user/add_payment_method_screen.dart';
 import 'screens/user/host_live_screen.dart';
 import 'screens/user/payout_screen.dart';
 import 'screens/user/viewer_live_screen.dart';
 import 'screens/user/individual_chat_screen.dart';
 import 'screens/user/notifications_screen.dart';
+import 'screens/user/post_image_viewer_screen.dart';
 import 'screens/user/public_profile_screen.dart';
 import 'screens/user/referrals_screen.dart';
 import 'screens/user/withdrawal_history_screen.dart';
@@ -24,6 +26,7 @@ import 'widget/bottom_navigation_bar.dart';
 import 'screens/colors.dart';
 import 'model/conversation_model.dart';
 import 'model/live_stream_model.dart';
+import 'model/post_model.dart';
 import 'model/user_model.dart';
 import 'service/api_service.dart';
 import 'service/diagnostics_service.dart';
@@ -105,6 +108,22 @@ class ModelLiveApp extends StatelessWidget {
         break;
       case '/notifications':
         page = const NotificationsScreen();
+        break;
+      // Home feed: create a post (returns the new PostModel when published).
+      case '/create-post':
+        page = const CreatePostScreen();
+        break;
+      // The argument is a Map with 'post' (PostModel) and 'index' (int).
+      case '/post-images':
+        final imgArg = settings.arguments;
+        if (imgArg is Map && imgArg['post'] is PostModel) {
+          page = PostImageViewerScreen(
+            post: imgArg['post'] as PostModel,
+            initialIndex: imgArg['index'] is int ? imgArg['index'] as int : 0,
+          );
+        } else {
+          page = const _PlaceholderScreen(title: 'Pictures');
+        }
         break;
       // The argument is a LiveStreamModel (with its host).
       case '/viewer-live':

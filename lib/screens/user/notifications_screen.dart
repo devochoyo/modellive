@@ -147,6 +147,7 @@ class _NotificationsScreenState extends State<NotificationsScreen>
     String? route;
     if (item.type == 'new_message') route = '/chat-list';
     if (item.type == 'new_follower') route = '/friends';
+    if (item.type == 'post_like' || item.type == 'post_comment') route = '/home';
     if (route == null) return;
     Navigator.pushNamedAndRemoveUntil(context, route, (r) => false);
   }
@@ -319,6 +320,10 @@ class _NotificationsScreenState extends State<NotificationsScreen>
         return Icons.cancel_rounded;
       case 'removed_from_stream':
         return Icons.videocam_off_rounded;
+      case 'post_like':
+        return Icons.favorite_rounded;
+      case 'post_comment':
+        return Icons.mode_comment_rounded;
       default:
         return Icons.notifications_rounded;
     }
