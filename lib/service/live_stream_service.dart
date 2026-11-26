@@ -206,8 +206,9 @@ class LiveStreamService {
 
     socket.onConnectError((error) {
       if (!firstConnect.isCompleted) {
+        // Shows the real reason on screen so we can see what is wrong.
         firstConnect.completeError(
-            ApiException('Could not connect to the live server.'));
+            ApiException('Could not connect to the live server. ($error)'));
       }
     });
 
@@ -216,11 +217,12 @@ class LiveStreamService {
     socket.connect();
 
     try {
-      await firstConnect.future.timeout(const Duration(seconds: 10));
+      await firstConnect.future.timeout(const Duration(seconds: 30));
     } catch (e) {
       disconnectSocket();
       if (e is ApiException) rethrow;
-      throw ApiException('Could not connect to the live server.');
+      throw ApiException(
+          'Could not connect to the live server. (no answer after 30 seconds)');
     }
   }
 
