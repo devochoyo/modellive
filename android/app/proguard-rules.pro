@@ -18,3 +18,11 @@
 # Google Play Billing (in_app_purchase)
 -keep class com.android.billingclient.** { *; }
 -dontwarn com.android.billingclient.**
+
+# VideoSDK ships its own copy of WebRTC and jni_zero under the package
+# "videosdk.org" (not "org.webrtc"). The native code looks these classes up
+# by name, so R8 must not rename or remove them.
+-keep class videosdk.** { *; }
+-dontwarn videosdk.**
+-keep class org.jni_zero.** { *; }
+-dontwarn org.jni_zero.**
